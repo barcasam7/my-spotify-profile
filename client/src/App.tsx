@@ -39,7 +39,7 @@ function ScrollToTop() {
 }
 
 function App() {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     setToken(accessToken);

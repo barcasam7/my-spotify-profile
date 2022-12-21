@@ -3,11 +3,11 @@
  * @param {function} fn an async function
  * @returns {function}
  */
-export const catchErrors = fn => {
-  return function(...args) {
-    return fn(...args).catch((err) => {
-      console.error(err);
-    })
+export const catchErrors = (fn: Function): Function => {
+  return function(...args: any[]): any {
+      return fn(...args).catch((err: []) => {
+        console.error(err);
+      })
   }
 }
 
@@ -17,7 +17,7 @@ export const catchErrors = fn => {
  * @returns {string} formatted duration string
  * @example 216699 -> '3:36'
  */
-export const formatDuration = ms => {
+export const formatDuration = (ms: number): string => {
   const minutes = Math.floor(ms / 60000);
   const seconds = Math.floor(((ms % 60000) / 1000));
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;

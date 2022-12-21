@@ -1,6 +1,10 @@
 import styled from 'styled-components/macro';
 
-const StyledHeader = styled.header`
+interface header{
+  type: string
+}
+
+const StyledHeader = styled.header<header>`
   display: flex;
   align-items: flex-end;
   position: relative;

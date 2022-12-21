@@ -15,14 +15,50 @@ import {
 } from '../components';
 import { StyledHeader } from '../styles';
 
+type stringOrNull = string | null;
+
+type Image = {
+  height: number | null,
+  width: number | null
+  url: string
+}
+
+type follower = {
+  total: number,
+  href: stringOrNull
+}
+
+type Profile = {
+  country: string,
+  display_name: string,
+  email: string,
+  explicit_content: Object,
+  external_urls: Object,
+  followers: follower,
+  href: string,
+  id: string,
+  images: Image[],
+  product: string,
+  type: string,
+  uri: string
+}
+
+type MusicList = {
+  total: number
+  limit: number,
+  href: stringOrNull,
+  items: []
+}
+
+
 const Profile = () => {
-  const [profile, setProfile] = useState(null);
-  const [playlists, setPlaylists] = useState(null);
-  const [topArtists, setTopArtists] = useState(null);
-  const [topTracks, setTopTracks] = useState(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [playlists, setPlaylists] = useState<MusicList | null>(null);
+  const [topArtists, setTopArtists] = useState<MusicList | null>(null);
+  const [topTracks, setTopTracks] = useState<MusicList | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData: Function = async () =>  {
       const userProfile = await getCurrentUserProfile();
       setProfile(userProfile.data);
 
