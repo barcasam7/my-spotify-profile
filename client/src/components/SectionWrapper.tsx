@@ -4,7 +4,7 @@ import { StyledSection } from "../styles";
 type SectionWrapper = {
   children: any,
   title: string,
-  seeAllLink: string,
+  seeAllLink?: string,
   breadcrumb?: boolean
 }
 
