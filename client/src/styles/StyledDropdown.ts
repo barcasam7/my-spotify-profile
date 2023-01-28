@@ -1,6 +1,10 @@
 import styled from 'styled-components/macro';
 
-const StyledDropdown = styled.div`
+type dropdown = {
+  active: boolean
+}
+
+const StyledDropdown = styled.div<dropdown>`
   position: absolute;
   top: 0;
   right: var(--spacing-md);

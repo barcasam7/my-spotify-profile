@@ -8,12 +8,22 @@ import {
   Loader
 } from '../components';
 
+type TopTracks = {
+  items: {} | Item[]
+}
+
+type Item = {
+  name: string,
+  id: string
+  images: []
+}
+
 const TopTracks = () => {
-  const [topTracks, setTopTracks] = useState(null);
+  const [topTracks, setTopTracks] = useState<TopTracks | null>(null);
   const [activeRange, setActiveRange] = useState('short');
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData: Function = async () => {
       const { data } = await getTopTracks(`${activeRange}_term`);
       setTopTracks(data);
     };

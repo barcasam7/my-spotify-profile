@@ -8,12 +8,16 @@ import {
   Loader
 } from '../components';
 
+type TopArtist = {
+  items: {} | []
+}
+
 const TopArtists = () => {
-  const [topArtists, setTopArtists] = useState(null);
+  const [topArtists, setTopArtists] = useState< null | TopArtist>(null);
   const [activeRange, setActiveRange] = useState('short');
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData: Function = async () => {
       const { data } = await getTopArtists(`${activeRange}_term`);
       setTopArtists(data);
     };

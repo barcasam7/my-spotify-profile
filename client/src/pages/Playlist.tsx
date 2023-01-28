@@ -6,18 +6,60 @@ import { catchErrors } from '../utils';
 import { TrackList, SectionWrapper, Loader } from '../components';
 import { StyledHeader, StyledDropdown } from '../styles';
 
+type stringOrNull = string | null;
+
+type Params = {
+  id: string
+}
+
+type TracksData = {
+  next: null | string
+  items: Tracks[]
+}
+
+type Tracks = {
+  track: Track
+  total: number
+}
+
+type Track = {
+  track_number: number
+  id: string
+  audio_features: AudioFeatures
+}
+
+type AudioFeatures = {
+  danceability: number,
+  tempo: number,
+  energy: number
+}
+
+type Playlist = {
+  name: string,
+  id: string
+  images: Image[]
+  followers: {total: number}
+  tracks: Tracks
+}
+
+type Image = {
+  height: number,
+  width: number,
+  url: string
+}
+
 const Playlist = () => {
-  const { id } = useParams();
-  const [playlist, setPlaylist] = useState(null);
-  const [tracksData, setTracksData] = useState(null);
-  const [tracks, setTracks] = useState(null);
-  const [audioFeatures, setAudioFeatures] = useState(null);
-  const [sortValue, setSortValue] = useState('');
+  const { id } = useParams<Params>();
+  const [playlist, setPlaylist] = useState<Playlist | null>(null);
+  const [tracksData, setTracksData] = useState<null | TracksData>(null);
+  const [tracks, setTracks] = useState<null | Tracks[]>(null);
+  const [audioFeatures, setAudioFeatures] = useState<null | any[]>(null);
+  const [sortValue, setSortValue] = useState<keyof AudioFeatures| ''>('');
   const sortOptions = ['danceability', 'tempo', 'energy'];
 
   // Get playlist data based on ID from route params
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData: Function = async () => {
       const { data } = await getPlaylistById(id);
       setPlaylist(data);
       setTracksData(data.tracks);
@@ -34,7 +76,7 @@ const Playlist = () => {
 
     // When tracksData updates, check if there are more tracks to fetch
     // then update the state variable
-    const fetchMoreData = async () => {
+    const fetchMoreData: Function = async () => {
       if (tracksData.next) {
         const { data } = await axios.get(tracksData.next);
         setTracksData(data);
@@ -47,7 +89,7 @@ const Playlist = () => {
     catchErrors(fetchMoreData());
 
     // Also update the audioFeatures state variable using the track IDs
-    const fetchAudioFeatures = async () => {
+    const fetchAudioFeatures: Function = async () => {
       const ids = tracksData.items.map(({ track }) => track.id).join(',');
       const { data } = await getAudioFeaturesForTracks(ids);
       setAudioFeatures(audioFeatures => ([
@@ -90,14 +132,19 @@ const Playlist = () => {
     }
 
     return [...tracksWithAudioFeatures].sort((a, b) => {
-      const aFeatures = a['audio_features'];
-      const bFeatures = b['audio_features'];
+      const aFeatures: AudioFeatures = a['audio_features'];
+      const bFeatures: AudioFeatures = b['audio_features'];
 
       if (!aFeatures || !bFeatures) {
-        return false;
+        return 0;
       }
 
-      return bFeatures[sortValue] - aFeatures[sortValue];
+      if(sortValue != ''){
+        return bFeatures[sortValue] - aFeatures[sortValue];
+      }
+
+      return 0;
+    
     });
   }, [sortValue, tracksWithAudioFeatures]);
 
@@ -105,7 +152,7 @@ const Playlist = () => {
     <>
       {playlist && (
         <>
-          <StyledHeader>
+          <StyledHeader type=''>
             <div className="header__inner">
               {playlist.images.length && playlist.images[0].url && (
                 <img className="header__img" src={playlist.images[0].url} alt="Playlist Artwork"/>
@@ -130,7 +177,7 @@ const Playlist = () => {
                 <select
                   name="track-order"
                   id="order-select"
-                  onChange={e => setSortValue(e.target.value)}
+                  onChange={e => setSortValue(e.target.value as keyof typeof audioFeatures)}
                   >
                   <option value="">Sort tracks</option>
                   {sortOptions.map((option, i) => (

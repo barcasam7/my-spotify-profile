@@ -3,7 +3,6 @@ import axios from 'axios';
 import { getCurrentUserPlaylists } from '../spotify';
 import { catchErrors } from '../utils';
 import { SectionWrapper, PlaylistsGrid, Loader } from '../components';
-import Playlist from './Playlist';
 
 type stringOrNull = string | null;
 
