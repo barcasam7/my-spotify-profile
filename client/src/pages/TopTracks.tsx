@@ -8,18 +8,11 @@ import {
   Loader
 } from '../components';
 
-type TopTracks = {
-  items: {} | Item[]
-}
+import { TopTracksData } from '../types';
 
-type Item = {
-  name: string,
-  id: string
-  images: []
-}
 
 const TopTracks = () => {
-  const [topTracks, setTopTracks] = useState<TopTracks | null>(null);
+  const [topTracks, setTopTracks] = useState<TopTracksData | null>(null);
   const [activeRange, setActiveRange] = useState('short');
 
   useEffect(() => {

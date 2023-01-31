@@ -14,45 +14,10 @@ import {
   Loader
 } from '../components';
 import { StyledHeader } from '../styles';
-
-type stringOrNull = string | null;
-
-type Image = {
-  height: number | null,
-  width: number | null
-  url: string
-}
-
-type follower = {
-  total: number,
-  href: stringOrNull
-}
-
-type Profile = {
-  country: string,
-  display_name: string,
-  email: string,
-  explicit_content: Object,
-  external_urls: Object,
-  followers: follower,
-  href: string,
-  id: string,
-  images: Image[],
-  product: string,
-  type: string,
-  uri: string
-}
-
-type MusicList = {
-  total: number
-  limit: number,
-  href: stringOrNull,
-  items: []
-}
-
+import { ProfileData, MusicList } from '../types';
 
 const Profile = () => {
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profile, setProfile] = useState<ProfileData | null>(null);
   const [playlists, setPlaylists] = useState<MusicList | null>(null);
   const [topArtists, setTopArtists] = useState<MusicList | null>(null);
   const [topTracks, setTopTracks] = useState<MusicList | null>(null);

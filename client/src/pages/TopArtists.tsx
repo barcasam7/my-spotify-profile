@@ -8,9 +8,7 @@ import {
   Loader
 } from '../components';
 
-type TopArtist = {
-  items: {} | []
-}
+import { TopArtist } from '../types';
 
 const TopArtists = () => {
   const [topArtists, setTopArtists] = useState< null | TopArtist>(null);

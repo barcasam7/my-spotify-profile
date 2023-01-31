@@ -3,22 +3,8 @@ import axios from 'axios';
 import { getCurrentUserPlaylists } from '../spotify';
 import { catchErrors } from '../utils';
 import { SectionWrapper, PlaylistsGrid, Loader } from '../components';
+import { Playlist, Item } from '../types';
 
-type stringOrNull = string | null;
-
-type Playlist = {
-  total: number
-  limit: number,
-  href: stringOrNull,
-  items: Item[]
-  next: null | string
-}
-
-type Item = {
-  name: string,
-  id: string
-  images: []
-}
 
 const Playlists = () => {
   const [playlistsData, setPlaylistsData] = useState<null | Playlist>(null);

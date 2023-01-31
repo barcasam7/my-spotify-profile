@@ -1,6 +1,10 @@
 import styled from 'styled-components/macro';
 
-const StyledGrid = styled.ul`
+type StyledGrid = {
+  type: string
+}
+
+const StyledGrid = styled.ul<StyledGrid>`
   list-style: none;
   margin: 0;
   padding: 0;

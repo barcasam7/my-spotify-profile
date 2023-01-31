@@ -5,52 +5,11 @@ import { getPlaylistById, getAudioFeaturesForTracks } from '../spotify';
 import { catchErrors } from '../utils';
 import { TrackList, SectionWrapper, Loader } from '../components';
 import { StyledHeader, StyledDropdown } from '../styles';
-
-type stringOrNull = string | null;
-
-type Params = {
-  id: string
-}
-
-type TracksData = {
-  next: null | string
-  items: Tracks[]
-}
-
-type Tracks = {
-  track: Track
-  total: number
-}
-
-type Track = {
-  track_number: number
-  id: string
-  audio_features: AudioFeatures
-}
-
-type AudioFeatures = {
-  danceability: number,
-  tempo: number,
-  energy: number
-}
-
-type Playlist = {
-  name: string,
-  id: string
-  images: Image[]
-  followers: {total: number}
-  tracks: Tracks
-}
-
-type Image = {
-  height: number,
-  width: number,
-  url: string
-}
+import { Params, PlaylistData, TracksData, Tracks, AudioFeatures } from '../types';
 
 const Playlist = () => {
   const { id } = useParams<Params>();
-  const [playlist, setPlaylist] = useState<Playlist | null>(null);
+  const [playlist, setPlaylist] = useState<PlaylistData | null>(null);
   const [tracksData, setTracksData] = useState<null | TracksData>(null);
   const [tracks, setTracks] = useState<null | Tracks[]>(null);
   const [audioFeatures, setAudioFeatures] = useState<null | any[]>(null);
