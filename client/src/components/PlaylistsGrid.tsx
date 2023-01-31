@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { StyledGrid } from '../styles';
+import { Playlist } from '../types';
 
-const PlaylistsGrid = ({ playlists }) => (
+const PlaylistsGrid = ({ items }: Playlist) => (
   <>
-    {playlists && playlists.length ? (
-      <StyledGrid>
-        {playlists.map((playlist, i) => (
+    {items && items.length ? (
+      <StyledGrid type=''>
+        {items.map((playlist, i) => (
           <li className="grid__item" key={i}>
             <Link className="grid__item__inner" to={`/playlists/${playlist.id}`}>
               {playlist.images.length && playlist.images[0] && (

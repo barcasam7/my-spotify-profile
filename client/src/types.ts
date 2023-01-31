@@ -19,6 +19,16 @@ export type Track = {
   track_number: number;
   id: string;
   audio_features: AudioFeatures;
+  album: Album;
+  name: string;
+  artists: Artist[];
+  duration_ms: number;
+  images: Image[];
+};
+
+export type Album = {
+  images: Image[];
+  name: string;
 };
 
 export type AudioFeatures = {
@@ -35,13 +45,18 @@ export type PlaylistData = {
   tracks: Tracks;
 };
 
-export type Playlist = {
+interface Response {
   total: number;
   limit: number;
   href: stringOrNull;
-  items: Item[];
   next: stringOrNull;
-};
+}
+
+export interface Playlist {
+  items: Item[];
+}
+
+export interface PlaylistResponse extends Response, Playlist {}
 
 export type Item = {
   name: string;
@@ -55,7 +70,7 @@ export type Image = {
   url: string;
 };
 
-export type follower = {
+export type Follower = {
   total: number;
   href: stringOrNull;
 };
@@ -66,7 +81,7 @@ export type ProfileData = {
   email: string;
   explicit_content: Object;
   external_urls: Object;
-  followers: follower;
+  followers: Follower;
   href: string;
   id: string;
   images: Image[];
@@ -83,9 +98,29 @@ export type MusicList = {
 };
 
 export type TopArtist = {
-  items: {} | [];
+  items: Artist[];
 };
 
 export type TopTracksData = {
-  items: {} | Item[];
+  items: Track[];
+};
+
+export type Artists = {
+  artists: Artist[];
+};
+
+export type Artist = {
+  name: string;
+  images: Image[];
+};
+
+export type Ranges = "short" | "medium" | "long";
+
+export type TimeRange = {
+  activeRange: Ranges;
+  setActiveRange: React.Dispatch<React.SetStateAction<Ranges>>;
+};
+
+export type TrackListData = {
+  items: Track[];
 };

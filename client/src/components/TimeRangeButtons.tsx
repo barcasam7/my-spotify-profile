@@ -1,6 +1,7 @@
 import { StyledRangeButtons } from '../styles';
+import { TimeRange } from '../types';
 
-const TimeRangeButtons = ({ activeRange, setActiveRange }) => {
+const TimeRangeButtons = ({ activeRange, setActiveRange }: TimeRange) => {
   return (
     <StyledRangeButtons>
       <li>

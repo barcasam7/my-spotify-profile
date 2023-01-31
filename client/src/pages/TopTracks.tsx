@@ -8,12 +8,12 @@ import {
   Loader
 } from '../components';
 
-import { TopTracksData } from '../types';
+import { TopTracksData, Ranges } from '../types';
 
 
 const TopTracks = () => {
   const [topTracks, setTopTracks] = useState<TopTracksData | null>(null);
-  const [activeRange, setActiveRange] = useState('short');
+  const [activeRange, setActiveRange] = useState<Ranges>('short');
 
   useEffect(() => {
     const fetchData: Function = async () => {
@@ -33,7 +33,7 @@ const TopTracks = () => {
         />
 
         {topTracks && topTracks.items ? (
-          <TrackList tracks={topTracks.items} />
+          <TrackList items={topTracks.items} />
         ) : (
           <Loader />
         )}

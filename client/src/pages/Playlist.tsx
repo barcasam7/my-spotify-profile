@@ -148,7 +148,7 @@ const Playlist = () => {
               </StyledDropdown>
 
               {sortedTracks ? (
-                <TrackList tracks={sortedTracks} />
+                <TrackList items={sortedTracks} />
               ) : (
                 <Loader />
               )}

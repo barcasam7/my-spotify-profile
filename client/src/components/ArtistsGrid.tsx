@@ -1,6 +1,7 @@
 import { StyledGrid } from '../styles';
+import { Artists } from '../types';
 
-const ArtistsGrid = ({ artists }) => (
+const ArtistsGrid = ({ artists }: Artists) => (
   <>
     {artists && artists.length ? (
       <StyledGrid type="artist">

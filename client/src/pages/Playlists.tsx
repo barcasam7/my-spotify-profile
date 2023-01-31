@@ -3,11 +3,11 @@ import axios from 'axios';
 import { getCurrentUserPlaylists } from '../spotify';
 import { catchErrors } from '../utils';
 import { SectionWrapper, PlaylistsGrid, Loader } from '../components';
-import { Playlist, Item } from '../types';
+import { PlaylistResponse, Item } from '../types';
 
 
 const Playlists = () => {
-  const [playlistsData, setPlaylistsData] = useState<null | Playlist>(null);
+  const [playlistsData, setPlaylistsData] = useState<null | PlaylistResponse>(null);
   const [playlists, setPlaylists] = useState<null | Item[] | []>(null);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Playlists = () => {
     <main>
       <SectionWrapper  title="Public Playlists" breadcrumb={true}>
         {playlists ? (
-          <PlaylistsGrid playlists={playlists} />
+          <PlaylistsGrid items={playlists} />
         ) : (
           <Loader />
         )}

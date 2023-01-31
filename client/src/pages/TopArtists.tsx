@@ -8,11 +8,11 @@ import {
   Loader
 } from '../components';
 
-import { TopArtist } from '../types';
+import { TopArtist, Ranges } from '../types';
 
 const TopArtists = () => {
   const [topArtists, setTopArtists] = useState< null | TopArtist>(null);
-  const [activeRange, setActiveRange] = useState('short');
+  const [activeRange, setActiveRange] = useState<Ranges>('short');
 
   useEffect(() => {
     const fetchData: Function = async () => {
