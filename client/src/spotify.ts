@@ -1,7 +1,11 @@
 import axios from "axios";
 
+type LOCALSTORAGE = {
+  [key: string]: string;
+};
+
 // Map for localStorage keys
-const LOCALSTORAGE_KEYS = {
+const LOCALSTORAGE_KEYS: LOCALSTORAGE = {
   accessToken: "spotify_access_token",
   refreshToken: "spotify_refresh_token",
   expireTime: "spotify_token_expire_time",
@@ -26,7 +30,7 @@ export const logout = () => {
     window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
   }
   // Navigate to homepage
-  window.location = window.location.origin;
+  window.location.href = window.location.origin;
 };
 
 /**
@@ -56,7 +60,10 @@ const refreshToken = async () => {
       LOCALSTORAGE_KEYS.accessToken,
       data.access_token
     );
-    window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
+    window.localStorage.setItem(
+      LOCALSTORAGE_KEYS.timestamp,
+      Date.now().toString()
+    );
 
     // Reload the page for localStorage updates to be reflected
     window.location.reload();
@@ -115,10 +122,13 @@ const getAccessToken = () => {
   if (queryParams[LOCALSTORAGE_KEYS.accessToken]) {
     // Store the query params in localStorage
     for (const property in queryParams) {
-      window.localStorage.setItem(property, queryParams[property]);
+      window.localStorage.setItem(property, queryParams[property]!);
     }
     // Set timestamp
-    window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
+    window.localStorage.setItem(
+      LOCALSTORAGE_KEYS.timestamp,
+      Date.now().toString()
+    );
     // Return access token from query params
     return queryParams[LOCALSTORAGE_KEYS.accessToken];
   }
@@ -179,7 +189,7 @@ export const getTopTracks = (time_range = "short_term") => {
  * @param {string} playlist_id - The Spotify ID for the playlist.
  * @returns {Promise}
  */
-export const getPlaylistById = playlist_id => {
+export const getPlaylistById = (playlist_id: string) => {
   return axios.get(`/playlists/${playlist_id}`);
 };
 
@@ -189,6 +199,6 @@ export const getPlaylistById = playlist_id => {
  * @param {string} ids - A comma-separated list of the Spotify IDs for the tracks
  * @returns {Promise}
  */
-export const getAudioFeaturesForTracks = ids => {
+export const getAudioFeaturesForTracks = (ids: string) => {
   return axios.get(`/audio-features?ids=${ids}`);
 };
