@@ -49,6 +49,7 @@ app.get("/login", (req, res) => {
     scope: scope,
   });
 
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
