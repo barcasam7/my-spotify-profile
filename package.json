@@ -15,11 +15,11 @@
   ],
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "server": "nodemon index.js",
+    "server": "nodemon api/index.js",
     "client": "cd client && npm start",
     "postinstall": "cd client && npm install",
     "build": "NODE_ENV=production cd client/ && npm install && npm run build",
-    "start-server": "node index.js"
+    "start-server": "node api/index.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
