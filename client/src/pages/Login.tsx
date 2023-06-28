@@ -26,7 +26,7 @@ const StyledLoginButton = styled.a`
 
 const LOGIN_URI =
   process.env.NODE_ENV !== "production"
-    ? "http://localhost:9000/login"
+    ? "http://localhost:9001/login"
     : "https://my-spotify-profile.vercel.app/login";
 
 const Login = () => (
