@@ -15,11 +15,11 @@
   ],
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "server": "concurrently \"npx tsc --watch\" \"nodemon -q api/index.js\"",
+    "server": "concurrently \"npx tsc --watch\" \"nodemon -q api/build/index.js\"",
     "client": "cd client && npm start",
     "postinstall": "cd client && npm install",
     "build": "NODE_ENV=production cd client/ && npm install && npm run build",
-    "start-server": "node api/index.js"
+    "start-server": "node api/build/index.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
